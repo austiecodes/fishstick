@@ -1,0 +1,29 @@
+{
+  "[cpp]": {
+    "editor.defaultFormatter": "anysphere.cpptools"
+  },
+  "cSpell.words": ["fishstick"],
+
+  // Disable C/C++ extension's IntelliSense to avoid conflicts with clangd
+  "C_Cpp.intelliSenseEngine": "disabled",
+
+  // Enable clangd
+  "clangd.path": "clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--completion-style=detailed",
+    "--function-arg-placeholders",
+    "--fallback-style=llvm"
+  ],
+
+  // Use clangd for C/C++ files
+  "files.associations": {
+    "*.h": "cpp",
+    "*.hpp": "cpp",
+    "*.cpp": "cpp",
+    "*.cxx": "cpp",
+    "*.cc": "cpp"
+  }
+}

@@ -1,6 +1,11 @@
 #include <iostream>
+#include <string>
 
-int main(){
-    std::cout << "xxx";
-    return 0;
+
+int test_chat_completion() {
+  return 0;
+}
+
+int main() {
+  return test_chat_completion();
 }
