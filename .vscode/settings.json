@@ -1,29 +1,41 @@
 {
-  "[cpp]": {
-    "editor.defaultFormatter": "anysphere.cpptools"
-  },
-  "cSpell.words": ["fishstick"],
-
-  // Disable C/C++ extension's IntelliSense to avoid conflicts with clangd
-  "C_Cpp.intelliSenseEngine": "disabled",
-
-  // Enable clangd
-  "clangd.path": "clangd",
-  "clangd.arguments": [
-    "--background-index",
-    "--clang-tidy",
-    "--header-insertion=iwyu",
-    "--completion-style=detailed",
-    "--function-arg-placeholders",
-    "--fallback-style=llvm"
+  // --- 通用设置 ---
+  // 开启保存时自动格式化。这是实现类似 'go fmt' 体验的关键。
+  "editor.formatOnSave": true,
+  // 设置格式化工具的配置，以便让 Clang-Format 知道如何查找项目级的配置文件。
+  // 'file' 表示 Clang-Format 会在项目根目录下寻找 '.clang-format' 文件。
+  "C_Cpp.clang_format_style": "file",
+  // 如果 clang-format 可执行文件不在系统的 PATH 中，需要在此指定路径。
+  // 否则保持为空，系统会自动查找。
+  "C_Cpp.clang_format_path": "",
+  // 禁用 C/C++ 扩展的内置格式化（如果不使用 clang-format，可设置为 'default'）。
+  // 建议使用 Clang-Format 来统一风格。
+  "C_Cpp.formatting": "clangFormat",
+  // 用于拼写检查的自定义词汇
+  "cSpell.words": [
+    "fishstick"
   ],
-
-  // Use clangd for C/C++ files
+  // --- C/C++ 语言特定设置 ---
+  // 对 C++ 文件设置默认的格式化程序为官方 C/C++ 扩展
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+    // 注意：此处不需要重复设置 "editor.formatOnSave"，因为上面已经全局设置了。
+    // 如果想覆盖全局设置，可以在这里单独设置。
+  },
+  // 对 C 文件设置默认的格式化程序为官方 C/C++ 扩展
+  "[c]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  // --- 文件关联设置 ---
+  // 确保 VS Code 将这些文件识别为 C++ 语言，从而应用上述的格式化设置。
   "files.associations": {
     "*.h": "cpp",
     "*.hpp": "cpp",
     "*.cpp": "cpp",
     "*.cxx": "cpp",
     "*.cc": "cpp"
-  }
+  },
+  // 禁用 C/C++ 扩展的 IntelliSense 引擎，如果你的 C/C++ 扩展只用于格式化和调试。
+  // 如果你主要使用官方扩展，请设置为 "default"。
+  "C_Cpp.intelliSenseEngine": "default"
 }
