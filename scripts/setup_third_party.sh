@@ -18,7 +18,7 @@ mkdir -p "$THIRD_PARTY_ROOT"
 # Go 对比：encoding/json 包
 if [ ! -d "$THIRD_PARTY_ROOT/json" ]; then
     echo "Cloning nlohmann/json..."
-    git clone --depth 1 --branch v3.11.3 https://github.com/nlohmann/json.git "$THIRD_PARTY_ROOT/json"
+    git clone --depth 1 --branch v3.12.0 https://github.com/nlohmann/json.git "$THIRD_PARTY_ROOT/json"
     echo "✓ nlohmann/json cloned"
 else
     echo "✓ nlohmann/json already exists, skipping..."
@@ -30,7 +30,7 @@ fi
 # Go 对比：net/http 包
 if [ ! -d "$THIRD_PARTY_ROOT/cpp-httplib" ]; then
     echo "Cloning cpp-httplib..."
-    git clone --depth 1 --branch v0.15.3 https://github.com/yhirose/cpp-httplib.git "$THIRD_PARTY_ROOT/cpp-httplib"
+    git clone --depth 1 --branch v0.28.0 https://github.com/yhirose/cpp-httplib.git "$THIRD_PARTY_ROOT/cpp-httplib"
     echo "✓ cpp-httplib cloned"
 else
     echo "✓ cpp-httplib already exists, skipping..."

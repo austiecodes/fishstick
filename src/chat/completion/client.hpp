@@ -6,6 +6,11 @@
 
 namespace chat::completion {
 
+constexpr std::string_view CHAT_COMPLETIONS_PATH = "/chat/completions";
+constexpr std::string_view MODEL_PATH = "/models";
+constexpr std::string_view DEFAULT_MODEL = "gpt-5-nano";
+
+
 // ChatCompletionClient is similar to a Go struct with methods.
 // Think of it as:
 //   type ChatCompletionClient struct { ... }

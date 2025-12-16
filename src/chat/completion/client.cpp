@@ -45,15 +45,15 @@ std::optional<ChatCompletionResponse> ChatCompletionClient::chat(const ChatCompl
         
         if (path_start == std::string::npos) {
             host = base_url_.substr(host_start);
-            path = "/chat/completions";
+            path = std::string(CHAT_COMPLETIONS_PATH);
         } else {
             host = base_url_.substr(host_start, path_start - host_start);
             std::string base_path = base_url_.substr(path_start);
             // Ensure path ends with /chat/completions
             if (base_path.back() == '/') {
-                path = base_path + "chat/completions";
+                path = base_path + std::string(CHAT_COMPLETIONS_PATH);
             } else {
-                path = base_path + "/chat/completions";
+                path = base_path + std::string(CHAT_COMPLETIONS_PATH);
             }
         }
         
