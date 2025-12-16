@@ -31,6 +31,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # 第三方库位置：~/codes/cpp/third_party/
 #   - json:        nlohmann/json (JSON 序列化)
 #   - cpp-httplib: cpp-httplib (HTTP 客户端)
+#   - CLI11:       CLI11 (命令行参数解析，支持子命令)
 
 # 定义统一的第三方库根目录
 # 可以通过环境变量覆盖，例如：cmake -DTHIRD_PARTY_ROOT=/path/to/third_party
@@ -49,6 +50,11 @@ if(NOT EXISTS "${THIRD_PARTY_ROOT}/cpp-httplib/httplib.h")
     message(WARNING "Please run: ./scripts/setup_third_party.sh")
 endif()
 
+if(NOT EXISTS "${THIRD_PARTY_ROOT}/CLI11/include/CLI/CLI.hpp")
+    message(WARNING "CLI11 not found at ${THIRD_PARTY_ROOT}/CLI11")
+    message(WARNING "Please run: ./scripts/setup_third_party.sh")
+endif()
+
 # -----------------------------------------------------------------------------
 # 6. 定义头文件搜索路径
 # -----------------------------------------------------------------------------
@@ -57,6 +63,8 @@ include_directories(src)
 include_directories(${THIRD_PARTY_ROOT}/json/include)
 # cpp-httplib 的头文件直接在根目录
 include_directories(${THIRD_PARTY_ROOT}/cpp-httplib)
+# CLI11 的头文件在 include/ 目录下
+include_directories(${THIRD_PARTY_ROOT}/CLI11/include)
 
 # -----------------------------------------------------------------------------
 # 6. 收集源文件
@@ -70,3 +78,8 @@ set(PROJECT_SOURCES
 # 7. 构建可执行文件
 # -----------------------------------------------------------------------------
 add_executable(my_app ${PROJECT_SOURCES})
+
+# -----------------------------------------------------------------------------
+# 8. CLI11（命令行参数解析，header-only）
+# -----------------------------------------------------------------------------
+# CLI11 是 header-only 库，不需要链接，只需 include_directories 即可

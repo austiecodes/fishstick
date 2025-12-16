@@ -3,4 +3,3 @@ IndentWidth: 4
 BreakBeforeBraces: Attach
 AllowShortFunctionsOnASingleLine: None
 AllowShortLambdasOnASingleLine: None
-AllowShortFunctionsOnASingleLine: None

@@ -38,14 +38,28 @@ else
     git pull || echo "  (Note: Already up to date or on specific tag)"
 fi
 
+# 3. CLI11 - 命令行参数解析库（支持子命令）
+# Go 对比：cobra 或 urfave/cli
+if [ ! -d "$THIRD_PARTY_ROOT/CLI11" ]; then
+    echo "Cloning CLI11..."
+    git clone --depth 1 --branch v2.6.1 https://github.com/CLIUtils/CLI11.git "$THIRD_PARTY_ROOT/CLI11"
+    echo "✓ CLI11 cloned"
+else
+    echo "✓ CLI11 already exists, skipping..."
+    cd "$THIRD_PARTY_ROOT/CLI11"
+    git pull || echo "  (Note: Already up to date or on specific tag)"
+fi
+
 echo ""
 echo "Third-party libraries setup complete!"
 echo ""
 echo "Libraries location:"
 echo "  - nlohmann/json:    $THIRD_PARTY_ROOT/json"
 echo "  - cpp-httplib:      $THIRD_PARTY_ROOT/cpp-httplib"
+echo "  - CLI11:            $THIRD_PARTY_ROOT/CLI11"
 echo ""
 echo "Usage in CMakeLists.txt:"
 echo "  set(THIRD_PARTY_ROOT \"$THIRD_PARTY_ROOT\")"
 echo "  include_directories(\${THIRD_PARTY_ROOT}/json/include)"
 echo "  include_directories(\${THIRD_PARTY_ROOT}/cpp-httplib)"
+echo "  include_directories(\${THIRD_PARTY_ROOT}/CLI11/include)"
