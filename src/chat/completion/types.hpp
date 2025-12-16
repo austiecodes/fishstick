@@ -38,4 +38,4 @@ struct ChatCompletionResponse {
     std::optional<float> total_tokens;
 };
 
-}  // namespace fishstick::chat::completion
+}  // namespace chat::completion

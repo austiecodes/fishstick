@@ -46,3 +46,6 @@ build
 
 # ai-ides
 .cursor/
+
+# index
+.cache

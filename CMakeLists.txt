@@ -21,9 +21,42 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # -----------------------------------------------------------------------------
-# 5. 定义头文件搜索路径
+# 5. 第三方库配置（统一管理在项目外部）
+# -----------------------------------------------------------------------------
+# 在 Go 中，你会用 go mod 管理依赖
+# 在 C++ 中，我们使用统一的 third_party 目录（项目外部）
+# 
+# 运行 scripts/setup_third_party.sh 来克隆依赖库
+# 
+# 第三方库位置：~/codes/cpp/third_party/
+#   - json:        nlohmann/json (JSON 序列化)
+#   - cpp-httplib: cpp-httplib (HTTP 客户端)
+
+# 定义统一的第三方库根目录
+# 可以通过环境变量覆盖，例如：cmake -DTHIRD_PARTY_ROOT=/path/to/third_party
+if(NOT DEFINED THIRD_PARTY_ROOT)
+    set(THIRD_PARTY_ROOT "$ENV{HOME}/codes/cpp/third_party")
+endif()
+
+# 检查第三方库是否存在
+if(NOT EXISTS "${THIRD_PARTY_ROOT}/json/include/nlohmann/json.hpp")
+    message(WARNING "nlohmann/json not found at ${THIRD_PARTY_ROOT}/json")
+    message(WARNING "Please run: ./scripts/setup_third_party.sh")
+endif()
+
+if(NOT EXISTS "${THIRD_PARTY_ROOT}/cpp-httplib/httplib.h")
+    message(WARNING "cpp-httplib not found at ${THIRD_PARTY_ROOT}/cpp-httplib")
+    message(WARNING "Please run: ./scripts/setup_third_party.sh")
+endif()
+
+# -----------------------------------------------------------------------------
+# 6. 定义头文件搜索路径
 # -----------------------------------------------------------------------------
 include_directories(src)
+# nlohmann/json 的头文件在 include/ 目录下
+include_directories(${THIRD_PARTY_ROOT}/json/include)
+# cpp-httplib 的头文件直接在根目录
+include_directories(${THIRD_PARTY_ROOT}/cpp-httplib)
 
 # -----------------------------------------------------------------------------
 # 6. 收集源文件
